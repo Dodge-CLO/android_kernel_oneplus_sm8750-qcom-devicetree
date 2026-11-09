@@ -42,6 +42,7 @@
 	aliases: aliases {
 		serial0 = &qupv3_se7_2uart;
 		hsuart0 = &qupv3_se14_4uart;
+		hsuart3	= &qupv3_se15_4uart;
 		ufshc1 = &ufshc_mem; /* Embedded UFS Slot */
 		mmc1 = &sdhc_2; /* SDC2 SD card slot */
 	};
@@ -271,14 +272,6 @@
 	};
 
 	reserved_memory: reserved-memory { };
-
-	mem-offline {
-		compatible = "qcom,mem-offline";
-		status="disabled";
-		offline-sizes = <0x2 0xc0000000 0x1 0x0>;
-		granule = <512>;
-		qcom,qmp = <&aoss_qmp>;
-	};
 
 	soc: soc { };
 	pcie0: pcie@1c00000 { };
@@ -2270,6 +2263,7 @@
 		compatible = "qcom,ramoops";
 		memory-region = <&ramoops_mem>;
 		pmsg-size = <0x200000>;
+		console-size = <0x40000>;
 		mem-type = <2>;
 	};
 
@@ -3787,7 +3781,9 @@
 		alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
 		reusable;
 		alignment = <0x0 0x400000>;
-		size = <0x0 0x1400000>;
+		/* ifdef OPLUS_FEATURE_FINGERPRINT */
+		size = <0x0 0x2000000>;
+		/* endif OPLUS_FEATURE_FINGERPRINT */
 	};
 
 	/* merged aop_config, tme_crash_dump, tme_log and uefi_log regions */
@@ -3964,6 +3960,11 @@
 		reg = <0x0 0xb8000000 0x0 0x1c0000>;
 	};
 
+	gunyah_hyp_mem1: gunyah_hyp_region1@bd930000 {
+		no-map;
+		reg = <0x0 0xbd930000 0x0 0x800000>;
+	};
+
 	hwfence_shbuf: hwfence-shmem {
 		no-map;
 		reg = <0x0 0xd4e23000 0x0 0x2dd000>;
@@ -4065,7 +4066,7 @@
 
 	ramoops_mem: ramoops-region {
 		alloc-ranges = <0x1 0x00000000 0xfffffffe 0xffffffff>;
-		size = <0x0 0x200000>;
+		size = <0x0 0x240000>;
 		no-map;
 	};
 
@@ -4100,7 +4101,7 @@
 #include "sun-walt.dtsi"
 
 &qupv3_se7_2uart {
-	status = "ok";
+	status = "disabled";
 };
 
 &qupv3_se3_i2c {
