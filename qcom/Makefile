@@ -6,6 +6,9 @@
 # Combined dtb target is also generated using the fdt_overlay tool.
 # dtb-y += <base>-<board>.dtb
 
+# Only the sun base DTBs are built here; the board overlays live in ../oplus.
+ifneq (,)
+
 add-overlays = $(foreach o,$1,$(foreach b,$2,$(eval $(basename $b)-$(basename $o)-dtbs = $b $o) $(basename $b)-$(basename $o).dtb))
 
 # canoe-dtb-y is list of DTBs to install when doing non-overlay build
@@ -1298,6 +1301,12 @@ dtb-y += $(autogvm-dtb-y)
 
 endif
 endif
+
+endif
+
+# sun base DTBs for the OnePlus overlays in ../oplus
+dtb-y += sun.dtb sun-v2.dtb sun-tp.dtb sun-tp-v2.dtb \
+	sunp.dtb sunp-v2.dtb sunp-tp.dtb sunp-tp-v2.dtb
 
 always-y        := $(dtb-y)
 subdir-y        := $(dts-dirs)

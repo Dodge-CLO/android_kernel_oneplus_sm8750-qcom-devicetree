@@ -4,3 +4,7 @@ vendor := $(src)
 ifneq "$(wildcard $(vendor)/qcom)" ""
 	subdir-y += qcom
 endif
+
+ifneq "$(wildcard $(vendor)/oplus)" ""
+	subdir-y += oplus
+endif
