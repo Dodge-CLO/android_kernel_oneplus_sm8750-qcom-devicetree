@@ -3936,6 +3936,12 @@
 		reg = <0x0 0x9eb00000 0x0 0x80000>;
 	};
 
+	/* Still used by the 6.6 era firmware dodge ships with */
+	lost_reg_mem2 {
+		no-map;
+		reg = <0x0 0x9eb80000 0x0 0x80000>;
+	};
+
 	soccp_mem: soccp_region@9ec00000 {
 		no-map;
 		reg = <0x0 0x9ec00000 0x0 0x180000>;
