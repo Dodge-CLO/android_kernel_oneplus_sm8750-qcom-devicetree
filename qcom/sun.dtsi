@@ -2566,7 +2566,8 @@
 	};
 
 	qcom,sps {
-		compatible = "qcom,msm-sps-4k";
+		/* 6.12 moved the old 4K pipe offsets (0x13000) to v1_7-4k; 0xC000 aborts on dodge */
+		compatible = "qcom,msm-sps-v1_7-4k";
 		qcom,pipe-attr-ee;
 	};
 
