@@ -4124,3 +4124,13 @@
 /delete-node/ &ipcc_self_ping_adsp;
 /delete-node/ &ipcc_self_ping_cdsp;
 /delete-node/ &ipcc_self_ping_slpi;
+
+&soc {
+	/*
+	 * The IPA node comes from the data techpack overlay. Link it to the
+	 * AOSS QMP here so the driver can send its power-collapse vote.
+	 */
+	qcom,ipa@3e00000 {
+		qcom,qmp = <&aoss_qmp>;
+	};
+};
